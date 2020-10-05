@@ -1,17 +1,150 @@
-<h3>Product Page - Index - {{@publisher.title}}</h3>
-
-{{#each products as |product|}}
-  <h4><LinkTo @route="products.show" @model={{product.id}}>{{product.name}}</LinkTo></h4>
-
-  <table>
-    {{#each product.productDataSubset as |data|}}
-      <tr>
-        <td>{{data.ticker}}</td>
-        <td>{{data.comp_name}}</td>
-        <td>{{data.per_end_date}}</td>
-      </tr>
-    {{/each}}
-  </table>
-{{/each}}
-
-{{outlet}}
+<div class="application-wrapper">
+	{{!-- NAVIGATION --}}
+	<div class="navigation">
+  		<div class="left-section icon-nav">
+			<a class="icon-nav__icon navbar-icon" {{action 'clickButton' 'icon'}}>
+				<i class="fa fa-bars" aria-hidden="true"></i>
+			</a>
+			<a class="icon-nav__nav" {{action 'clickButton' 'Alternative Data'}}>Alternative Data</a>
+			<a class="icon-nav__nav active" {{action 'clickButton' 'Core Financial Data'}}>Core Financial Data</a>
+		</div>
+		<div class="center-section logo-login">
+			<a class="logo-login__logo">
+				<img src="assets/quandl-logo.svg" alt="Quandl" class="quandl-logo">
+			</a>
+		</div>
+		<div class="right-section logo-login">
+			<a class="logo-login__login" {{action 'clickButton' 'docs & help'}}>docs &amp; help</a>
+			<a class="logo-login__login" {{action 'clickButton' 'blog'}}>blog</a>
+			<a class="logo-login__login" {{action 'clickButton' 'sign in'}}>sign in</a>
+		</div>
+	</div>
+	{{!-- DATA PUBLISHER --}}
+	<header class="data-publisher">
+        <div class="info">
+			<div class="image">
+ 				<img src="/assets/avatar.png" class="image">
+			</div>
+            <div class="large-header">Data Publisher</div>
+        </div>
+    </header>
+	{{!-- PRODUCT --}}
+	<div class="product">
+		<div class="product-wrapper">
+			<div class="product-detail">
+				<p class="dataset-summary app-font">Datasets in this data product</p>
+			{{!-- Data Table --}}
+			{{#each products as |product|}}
+				<div class="product-table">
+					<div class="table-item">
+						<div class="item-head">
+							<div class="small-header app-font product-name">{{product.name}}</div>
+							<div class="small-header app-font expand"><LinkTo @route="products.show" @model={{product.id}}>Expand</LinkTo></div>
+						</div>
+						<div class="table">
+							<table class="table table-striped table-bordered table-sm" cellspacing="0" width="100%" margin-bottom="0px">
+								<thead>
+									<tr class="app-color-light">
+									<th scope="col">m_ticker</th>
+									<th scope="col">ticker</th>
+									<th scope="col">comp_name</th>
+									<th scope="col">comp_name_2</th>
+									<th scope="col">exchange</th>
+									<th scope="col">currency_code</th>
+									<th scope="col">per_end_date</th>
+									<th scope="col">per_type</th>
+									<th scope="col">per_code</th>
+									<th scope="col">per_fisc_year</th>
+									<th scope="col">per_fisc_qtr</th>
+									<th scope="col">per_cal_year</th>
+									<th scope="col">per_cal_qtr</th>
+									<th scope="col">rev_type</th>
+									<th scope="col">rev_type_desc</th>
+									<th scope="col">EPS</th>
+									<th scope="col">broker_name</th>
+									<th scope="col">analyst_name</th>
+									<th scope="col">eps_rev_date</th>
+									<th scope="col">eps_rev_est</th>
+									<th scope="col">eps_rev_date_prev</th>
+									<th scope="col">eps_rev_est_prev</th>
+									</tr>
+								</thead>
+								{{#each product.productDataSubset as |data|}}
+								<tr>
+									<td>{{data.m_ticker}}</td>
+									<td>{{data.ticker}}</td>
+									<td>{{data.comp_name}}</td>
+									<td>{{data.comp_name_2}}</td>
+									<td>{{data.exchange}}</td>
+									<td>{{data.currency_code}}</td>
+									<td>{{data.per_end_date}}</td>
+									<td>{{data.per_type}}</td>
+									<td>{{data.per_code}}</td>
+									<td>{{data.per_fisc_year}}</td>
+									<td>{{data.per_fisc_qtr}}</td>
+									<td>{{data.per_cal_year}}</td>
+									<td>{{data.per_cal_qtr}}</td>
+									<td>{{data.rev_type}}</td>
+									<td>{{data.rev_type_desc}}</td>
+									<td>{{data.EPS}}</td>
+									<td>{{data.broker_name}}</td>
+									<td>{{data.analyst_name}}</td>
+									<td>{{data.eps_rev_date}}</td>
+									<td>{{data.eps_rev_est}}</td>
+									<td>{{data.eps_rev_date_prev}}</td>
+									<td>{{data.eps_rev_est_prev}}</td>
+								</tr>
+								{{/each}}
+							</table>
+						</div>
+						<div class="sample-rows app-color-light">
+							<div class="dataset-summary app-font">Sample Rows</div>
+						</div>
+					</div>
+				</div>
+			{{/each}}
+			</div>
+		</div>
+		<div class="sidebar-wrapper">
+			<div class="sidebar">
+				<div class="sidebar__section">
+					<button type="button" class="btn btn-outline-success app-font" {{action 'clickButton' 'Commercial Data'}}>Commercial Data</button>
+					<div class="data-overview">
+						<div class="app-font">Data Overview</div>
+						<p class="overview-detail">Updated daily, the ORATS professional grade database of implied and historical volatility information covers all US equity options.</p>
+					</div>
+					<table class="data-info">
+						<div class="info-item">
+							<td class="info-key">Delivery Frequency  <i class="fa fa-info-circle info-button" aria-hidden="true"></i></td>
+							<td class="info-value">{{publisher.deliveryFrequency}}</td>
+						</div>
+						<div class="info-item">
+							<td class="info-key">Data Frequency  <i class="fa fa-info-circle info-button" aria-hidden="true"></i></td>
+							<td class="info-value">{{publisher.dataFrequency}}</td>
+						</div>
+						<div class="info-item">
+							<td class="info-key">Reporting Lag  <i class="fa fa-info-circle info-button" aria-hidden="true"></i></td>
+							<td class="info-value">{{publisher.reportingLag}}</td>
+						</div>
+						<div class="info-item">
+							<td class="info-key">History  <i class="fa fa-info-circle info-button" aria-hidden="true"></i></td>
+							<td class="info-value">{{publisher.history}}</td>
+						</div>
+						<div class="info-item-last">
+							<td class="info-key">Coverage  <i class="fa fa-info-circle info-button" aria-hidden="true"></i></td>
+							<td class="info-value">{{publisher.coverage}}</td>
+						</div>
+					</table>
+					<div class="table-api">
+						<div class="table-api__font">Tables API<i class="fa fa-info-circle info-button" aria-hidden="true"></i></div>
+					</div>
+				</div>
+				<div class="sidebar__section">
+					<div class="price">
+						<a class="price__font app-font" {{action 'clickButton' 'Price'}}>Pricing</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
