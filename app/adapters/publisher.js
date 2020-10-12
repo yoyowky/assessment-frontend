@@ -1,8 +1,9 @@
 import Adapter from '@ember-data/adapter';
+import { Promise } from 'rsvp';
 
 export default class ApplicationAdapter extends Adapter {
-  findRecord(store, type, id){
-      return new Ember.RSVP.Promise(function(resolve,reject){
+  findRecord(id){
+      return new Promise(function(resolve){
           resolve({
             id,
             title: "XYZ Corp",
