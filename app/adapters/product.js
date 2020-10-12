@@ -5,7 +5,7 @@ import sampleData from "assessment-frontend/models/fixtures/sample-data"
 export default class ApplicationAdapter extends Adapter {
   findRecord(id){
       return new Promise(function(resolve){
-          resolve({id, name: `Product ${id.toUpperCase()}`, data: sampleData})
+          resolve({id,name:"Product", data: sampleData})
       })
   }
   findAll(){
